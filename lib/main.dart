@@ -85,84 +85,90 @@ class _HomePageState extends State<HomePage> {
             color: Theme.of(context).colorScheme.onBackground,
           ),
         )),
-        bottomNavigationBar: NavigationBar(
-            selectedIndex: selectedIndex,
-            onDestinationSelected: (value) {
-              setState(() {
-                selectedIndex = value;
-              });
-            },
-            destinations: const [
-              NavigationDestination(
-                icon: Icon(Icons.home),
-                label: "Home",
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.settings),
-                label: "Pits",
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.person_add),
-                label: "Scouting",
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.gamepad),
-                label: "Drivers",
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.account_tree),
-                label: "Network",
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.add_chart),
-                label: "Stats",
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.grid_on),
-                label: "Field",
-              )
-            ]),
+        bottomNavigationBar: constraints.maxWidth <= 600
+            ? NavigationBar(
+                selectedIndex: selectedIndex,
+                onDestinationSelected: (value) {
+                  setState(() {
+                    selectedIndex = value;
+                  });
+                },
+                destinations: const [
+                    NavigationDestination(
+                      icon: Icon(Icons.home),
+                      label: "Home",
+                    ),
+                    NavigationDestination(
+                      icon: Icon(Icons.settings),
+                      label: "Pits",
+                    ),
+                    NavigationDestination(
+                      icon: Icon(Icons.person_add),
+                      label: "Scouting",
+                    ),
+                    NavigationDestination(
+                      icon: Icon(Icons.gamepad),
+                      label: "Drivers",
+                    ),
+                    NavigationDestination(
+                      icon: Icon(Icons.account_tree),
+                      label: "Network",
+                    ),
+                    NavigationDestination(
+                      icon: Icon(Icons.add_chart),
+                      label: "Stats",
+                    ),
+                    NavigationDestination(
+                      icon: Icon(Icons.grid_on),
+                      label: "Field",
+                    )
+                  ])
+            : null,
         body: Row(children: [
           SafeArea(
-              child: NavigationRail(
-            selectedIndex: selectedIndex,
-            onDestinationSelected: (value) {
-              setState(() {
-                selectedIndex = value;
-              });
-            },
-            backgroundColor: Theme.of(context).bottomAppBarTheme.color,
-            destinations: const [
-              NavigationRailDestination(
-                icon: Icon(Icons.home),
-                label: Text("Home"),
-              ),
-              NavigationRailDestination(
-                icon: Icon(Icons.settings),
-                label: Text("Pits"),
-              ),
-              NavigationRailDestination(
-                icon: Icon(Icons.person_add),
-                label: Text("Scouting"),
-              ),
-              NavigationRailDestination(
-                icon: Icon(Icons.gamepad),
-                label: Text("Drivers"),
-              ),
-              NavigationRailDestination(
-                icon: Icon(Icons.account_tree),
-                label: Text("Network"),
-              ),
-              NavigationRailDestination(
-                icon: Icon(Icons.add_chart),
-                label: Text("Stats"),
-              ),
-              NavigationRailDestination(
-                icon: Icon(Icons.grid_on),
-                label: Text("Field"),
-              ),
-            ],
-          )),
+              child: constraints.maxWidth > 600
+                  ? NavigationRail(
+                      selectedIndex: selectedIndex,
+                      onDestinationSelected: (value) {
+                        setState(() {
+                          selectedIndex = value;
+                        });
+                      },
+                      backgroundColor:
+                          Theme.of(context).bottomAppBarTheme.color,
+                      extended: constraints.maxWidth > 800,
+                      destinations: const [
+                        NavigationRailDestination(
+                          icon: Icon(Icons.home),
+                          label: Text("Home"),
+                        ),
+                        NavigationRailDestination(
+                          icon: Icon(Icons.settings),
+                          label: Text("Pits"),
+                        ),
+                        NavigationRailDestination(
+                          icon: Icon(Icons.person_add),
+                          label: Text("Scouting"),
+                        ),
+                        NavigationRailDestination(
+                          icon: Icon(Icons.gamepad),
+                          label: Text("Drivers"),
+                        ),
+                        NavigationRailDestination(
+                          icon: Icon(Icons.account_tree),
+                          label: Text("Network"),
+                        ),
+                        NavigationRailDestination(
+                          icon: Icon(Icons.add_chart),
+                          label: Text("Stats"),
+                        ),
+                        NavigationRailDestination(
+                          icon: Icon(Icons.grid_on),
+                          label: Text("Field"),
+                        ),
+                      ],
+                    )
+                  : Container()),
           Expanded(
             child: SafeArea(
               child: Container(
