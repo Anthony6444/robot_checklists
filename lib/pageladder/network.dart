@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class PageLadderField extends StatelessWidget {
+class PageLadderNetwork extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Center(
-      child: Text("Field"),
+      child: Text("Network"),
     );
   }
 }

@@ -1,6 +1,13 @@
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:robot_checklists/pageladder/drivers.dart';
+import 'package:robot_checklists/pageladder/field.dart';
 import 'package:robot_checklists/pageladder/home.dart';
+import 'package:robot_checklists/pageladder/network.dart';
+import 'package:robot_checklists/pageladder/pits.dart';
+import 'package:robot_checklists/pageladder/scouting.dart';
+import 'package:robot_checklists/pageladder/stats.dart';
 
 void main() {
   runApp(const MainApp());
@@ -11,15 +18,22 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => AppState(),
-      child: MaterialApp(
-        theme: ThemeData(
+    return DynamicColorBuilder(builder: (lightColorScheme, darkColorScheme) {
+      return ChangeNotifierProvider(
+        create: (context) => AppState(),
+        child: MaterialApp(
+          theme: ThemeData(
             useMaterial3: true,
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.green)),
-        home: HomePage(),
-      ),
-    );
+            colorScheme: lightColorScheme ?? ColorScheme.light(),
+          ),
+          darkTheme: ThemeData(
+            colorScheme: darkColorScheme ?? ColorScheme.dark(),
+            useMaterial3: true,
+          ),
+          home: HomePage(),
+        ),
+      );
+    });
   }
 }
 
@@ -41,11 +55,36 @@ class _HomePageState extends State<HomePage> {
       case 0:
         page = PageLadderHome();
         break;
+      case 1:
+        page = PageLadderPits();
+        break;
+      case 2:
+        page = PageLadderScouting();
+        break;
+      case 3:
+        page = PageLadderDrivers();
+        break;
+      case 4:
+        page = PageLadderNetwork();
+        break;
+      case 5:
+        page = PageLadderStats();
+        break;
+      case 6:
+        page = PageLadderField();
+        break;
       default:
         page = const Placeholder();
     }
     return LayoutBuilder(builder: (context, constraints) {
       return Scaffold(
+        appBar: AppBar(
+            title: Text(
+          "Robot Scouting",
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.onBackground,
+          ),
+        )),
         bottomNavigationBar: NavigationBar(
             selectedIndex: selectedIndex,
             onDestinationSelected: (value) {
@@ -57,6 +96,10 @@ class _HomePageState extends State<HomePage> {
               NavigationDestination(
                 icon: Icon(Icons.home),
                 label: "Home",
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.settings),
+                label: "Pits",
               ),
               NavigationDestination(
                 icon: Icon(Icons.person_add),
@@ -88,10 +131,15 @@ class _HomePageState extends State<HomePage> {
                 selectedIndex = value;
               });
             },
+            backgroundColor: Theme.of(context).bottomAppBarTheme.color,
             destinations: const [
               NavigationRailDestination(
                 icon: Icon(Icons.home),
                 label: Text("Home"),
+              ),
+              NavigationRailDestination(
+                icon: Icon(Icons.settings),
+                label: Text("Pits"),
               ),
               NavigationRailDestination(
                 icon: Icon(Icons.person_add),
