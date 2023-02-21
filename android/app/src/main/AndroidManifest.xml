@@ -2,7 +2,7 @@
     package="com.example.robot_checklists">
    <application
         android:label="robot_checklists"
-        android:name="${applicationName}"
+        android:name="Robot Checklists"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
