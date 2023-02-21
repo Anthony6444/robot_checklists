@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.robot_checklists">
    <application
-        android:label="robot_checklists"
-        android:name="Robot Checklists"
+        android:label="Robot Checklists"
+        android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
