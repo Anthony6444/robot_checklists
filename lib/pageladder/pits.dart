@@ -11,14 +11,30 @@ class PageLadderPits extends StatefulWidget {
 }
 
 class PageLadderPitsState extends State<PageLadderPits> {
-  // late List<ChecklistItem> _preflightItems;
   late List<Map<String, dynamic>> pitsData;
+  bool loaded = false;
+  void runOnce() {
+    if (loaded) return;
+    var appState = context.watch<AppState>();
+    appState.loadYamlData();
+    loaded = true;
+  }
+
   bool allComplete() {
     for (var i in _range(0, pitsData.length)) {
       for (ChecklistItem v in pitsData[i]['list']) {
         if (!v.checked) {
           return false;
         }
+      }
+    }
+    return true;
+  }
+
+  bool indexComplete(i) {
+    for (ChecklistItem v in pitsData[i]['list']) {
+      if (!v.checked) {
+        return false;
       }
     }
     return true;
@@ -38,9 +54,10 @@ class PageLadderPitsState extends State<PageLadderPits> {
 
   @override
   Widget build(BuildContext context) {
+    runOnce();
     var appState = context.watch<AppState>();
     pitsData = appState.pitsData;
-    // _preflightItems = appState.preFlightItems;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.max,
@@ -73,7 +90,6 @@ class PageLadderPitsState extends State<PageLadderPits> {
                       ElevatedButton(
                         onPressed: () {
                           resetList();
-                          appState.loadYamlData();
                           setState(() {});
                         },
                         child: Row(
@@ -89,56 +105,91 @@ class PageLadderPitsState extends State<PageLadderPits> {
                 : ListView.builder(
                     itemCount: pitsData.length,
                     itemBuilder: (BuildContext context, i) {
-                      return ExpansionTile(
-                          title: Text(pitsData[i]['name']),
-                          children: () {
-                            List<Card> returnables = [];
-                            for (var j
-                                in _range(0, pitsData[i]['list'].length)) {
-                              returnables.add(
-                                Card(
-                                  color: pitsData[i]['list'][j].checked
-                                      ? Theme.of(context).disabledColor
-                                      : null,
-                                  child: ListTile(
-                                    onTap: () {
-                                      pitsData[i]['list'][j].toggleChecked();
-                                      setState(() {});
-                                    },
-                                    leading: CircleAvatar(
-                                        backgroundColor:
-                                            pitsData[i]['list'][j].checked
-                                                ? Theme.of(context)
-                                                    .colorScheme
-                                                    .secondaryContainer
-                                                : Theme.of(context)
-                                                    .colorScheme
-                                                    .tertiaryContainer,
-                                        child: pitsData[i]['list'][j].checked
-                                            ? Icon(
-                                                Icons.check,
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .onSecondaryContainer,
-                                              )
-                                            : Text(
-                                                pitsData[i]['list'][j]
-                                                    .name[0]
-                                                    .toUpperCase(),
-                                                style: TextStyle(
+                      return Card(
+                        color: indexComplete(i)
+                            ? Theme.of(context).disabledColor
+                            : null,
+                        child: Theme(
+                          data: Theme.of(context)
+                              .copyWith(dividerColor: Colors.transparent),
+                          child: ExpansionTile(
+                              leading: CircleAvatar(
+                                  backgroundColor: indexComplete(i)
+                                      ? Theme.of(context)
+                                          .colorScheme
+                                          .secondaryContainer
+                                      : Theme.of(context)
+                                          .colorScheme
+                                          .tertiaryContainer,
+                                  child: indexComplete(i)
+                                      ? Icon(
+                                          Icons.check,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSecondaryContainer,
+                                        )
+                                      : Text(
+                                          pitsData[i]['name'][0].toUpperCase(),
+                                          style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onSecondaryContainer),
+                                        )),
+                              subtitle: Text(pitsData[i]['desc']),
+                              title: Text(pitsData[i]['name']),
+                              children: () {
+                                List<Card> returnables = [];
+                                for (var j
+                                    in _range(0, pitsData[i]['list'].length)) {
+                                  returnables.add(
+                                    Card(
+                                      color: pitsData[i]['list'][j].checked
+                                          ? Theme.of(context).disabledColor
+                                          : null,
+                                      child: ListTile(
+                                        onTap: () {
+                                          pitsData[i]['list'][j]
+                                              .toggleChecked();
+                                          setState(() {});
+                                        },
+                                        leading: CircleAvatar(
+                                            backgroundColor:
+                                                pitsData[i]['list'][j].checked
+                                                    ? Theme.of(context)
+                                                        .colorScheme
+                                                        .secondaryContainer
+                                                    : Theme.of(context)
+                                                        .colorScheme
+                                                        .tertiaryContainer,
+                                            child: pitsData[i]['list'][j]
+                                                    .checked
+                                                ? Icon(
+                                                    Icons.check,
                                                     color: Theme.of(context)
                                                         .colorScheme
-                                                        .onSecondaryContainer),
-                                              )),
-                                    title: Text(pitsData[i]['list'][j].name),
-                                    subtitle:
-                                        Text(pitsData[i]['list'][j].desc ?? ""),
-                                  ),
-                                ),
-                              );
-                            }
-                            return returnables;
-                          }());
+                                                        .onSecondaryContainer,
+                                                  )
+                                                : Text(
+                                                    pitsData[i]['list'][j]
+                                                        .name[0]
+                                                        .toUpperCase(),
+                                                    style: TextStyle(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .onSecondaryContainer),
+                                                  )),
+                                        title:
+                                            Text(pitsData[i]['list'][j].name),
+                                        subtitle: Text(
+                                            pitsData[i]['list'][j].desc ?? ""),
+                                      ),
+                                    ),
+                                  );
+                                }
+                                return returnables;
+                              }()),
+                        ),
+                      );
                     },
                   ),
           ),

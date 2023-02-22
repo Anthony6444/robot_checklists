@@ -40,28 +40,15 @@ class MainApp extends StatelessWidget {
 }
 
 class AppState extends ChangeNotifier {
-  List<ChecklistItem> preFlightItems = <ChecklistItem>[
-    ChecklistItem(name: "Thing One", checked: false),
-    ChecklistItem(name: "two", desc: "More information", checked: true),
-    ChecklistItem(
-        name: "Another thing", desc: "Detail detail detail", checked: false),
-  ];
-  List<ChecklistItem> postMatchItems = <ChecklistItem>[
-    ChecklistItem(name: " Numero Uno", checked: false),
-    ChecklistItem(name: "Dos", desc: "More information", checked: true),
-    ChecklistItem(name: "Zwanzig", desc: "Ich nicht verstehe", checked: false),
-  ];
-  int pitsSelectedIndex = 0;
   List<Map<String, dynamic>> pitsData = [];
   Future<void> loadYamlData() async {
     List _range(int from, int to) => List.generate(to - from, (i) => i + from);
     final yamlString = await rootBundle.loadString("assets/pits.yaml");
     final List<dynamic> parsedYaml = loadYaml(yamlString).toList();
-    print(parsedYaml);
     for (var i in _range(0, parsedYaml.length)) {
       pitsData.add({});
       pitsData[i]['name'] = parsedYaml[i]['name'];
-      pitsData[i]['desc'] = parsedYaml[i]['name'];
+      pitsData[i]['desc'] = parsedYaml[i]['desc'];
       pitsData[i]['list'] = [];
       for (var j in parsedYaml[i]['list']) {
         if (j == null) {
