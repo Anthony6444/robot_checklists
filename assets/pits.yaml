@@ -1,0 +1,36 @@
+# list definitions: an empty list will cause weird errors
+-
+  name: Load-in
+  desc: Items to be done at competition load-in
+  list:
+    - Set up Canopy
+    - Hang up lights
+    - Hang up banners/signs
+    - Bring in tool chest
+    - Bring in rolling shelf
+    - Populate rolling shelf
+    - Bring in robot
+-
+  name: Preflight
+  desc: Robot testing and checkout before each match
+  list:
+    - ["Check drivetrain functionality", "Forward/Backward, Left/Right"]
+    - ["Check pneumatic pressure", "120 on high side, 40 on low side"]
+    - Ensure that the 
+    - Check RSL
+-
+  name: Match start
+  desc: Before a match on the field
+  list:
+    - Thing to do
+-
+  name: Post-match
+  desc: Reset and pit after every match
+  list:
+    - thing to do
+-
+  name: Clean up
+  desc: Load-out before we go home from an event
+  list:
+    - thing to do
+    - more things to do

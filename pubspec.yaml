@@ -11,6 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   provider: ^6.0.5
+  yaml: ^3.1.1
 
 dev_dependencies:
   flutter_test:
@@ -28,4 +29,6 @@ flutter:
   - family: BraveEightyOne
     fonts:
      - asset: fonts/BraveEightyOneRegular.ttf
+  assets:
+    - assets/pits.yaml
     

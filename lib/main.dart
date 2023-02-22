@@ -1,5 +1,6 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:robot_checklists/pageladder/drivers.dart';
 import 'package:robot_checklists/pageladder/field.dart';
@@ -8,6 +9,7 @@ import 'package:robot_checklists/pageladder/network.dart';
 import 'package:robot_checklists/pageladder/pits.dart';
 import 'package:robot_checklists/pageladder/scouting.dart';
 import 'package:robot_checklists/pageladder/stats.dart';
+import 'package:yaml/yaml.dart';
 
 void main() {
   runApp(const MainApp());
@@ -37,7 +39,41 @@ class MainApp extends StatelessWidget {
   }
 }
 
-class AppState extends ChangeNotifier {}
+class AppState extends ChangeNotifier {
+  List<ChecklistItem> preFlightItems = <ChecklistItem>[
+    ChecklistItem(name: "Thing One", checked: false),
+    ChecklistItem(name: "two", desc: "More information", checked: true),
+    ChecklistItem(
+        name: "Another thing", desc: "Detail detail detail", checked: false),
+  ];
+  List<ChecklistItem> postMatchItems = <ChecklistItem>[
+    ChecklistItem(name: " Numero Uno", checked: false),
+    ChecklistItem(name: "Dos", desc: "More information", checked: true),
+    ChecklistItem(name: "Zwanzig", desc: "Ich nicht verstehe", checked: false),
+  ];
+  int pitsSelectedIndex = 0;
+  List<Map<String, dynamic>> pitsData = [];
+  Future<void> loadYamlData() async {
+    List _range(int from, int to) => List.generate(to - from, (i) => i + from);
+    final yamlString = await rootBundle.loadString("assets/pits.yaml");
+    final List<dynamic> parsedYaml = loadYaml(yamlString).toList();
+    print(parsedYaml);
+    for (var i in _range(0, parsedYaml.length)) {
+      pitsData.add({});
+      pitsData[i]['name'] = parsedYaml[i]['name'];
+      pitsData[i]['desc'] = parsedYaml[i]['name'];
+      pitsData[i]['list'] = [];
+      for (var j in parsedYaml[i]['list']) {
+        if (j == null) {
+          throw AssertionError(
+              "List '${pitsData[i]['name']}' should not be empty or have empty items");
+        } else {
+          pitsData[i]['list'] += [ChecklistItem.fromYaml(j)];
+        }
+      }
+    }
+  }
+}
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -77,13 +113,23 @@ class _HomePageState extends State<HomePage> {
         page = const Placeholder();
     }
     return LayoutBuilder(builder: (context, constraints) {
+      TextStyle titleTextStyle = TextStyle(
+          color: Theme.of(context).colorScheme.onBackground,
+          fontFamily: "BraveEightyOne");
       return Scaffold(
         appBar: AppBar(
-            title: Text(
-          "Robot Scouting",
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.onBackground,
-          ),
+            title: Row(
+          children: [
+            Text(
+              "Trinity Robotics".toUpperCase(),
+              style: titleTextStyle,
+            ),
+            const Spacer(),
+            Text(
+              "FRC 4215",
+              style: titleTextStyle,
+            )
+          ],
         )),
         bottomNavigationBar: constraints.maxWidth <= 600
             ? NavigationBar(
@@ -136,7 +182,7 @@ class _HomePageState extends State<HomePage> {
                       },
                       backgroundColor:
                           Theme.of(context).bottomAppBarTheme.color,
-                      extended: constraints.maxWidth > 800,
+                      labelType: NavigationRailLabelType.all,
                       destinations: const [
                         NavigationRailDestination(
                           icon: Icon(Icons.home),

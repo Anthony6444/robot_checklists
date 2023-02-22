@@ -6,8 +6,13 @@ class PageLadderHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<AppState>();
-    return Center(
-      child: Text("Home"),
+    return const Center(
+      child: Card(
+        child: Padding(
+          padding: EdgeInsetsDirectional.all(10),
+          child: Text("Fancy Homepage"),
+        ),
+      ),
     );
   }
 }
