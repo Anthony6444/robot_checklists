@@ -19,3 +19,13 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+  - family: OrionPax
+    fonts:
+    - asset: fonts/OrionPax.ttf
+    - asset: fonts/OrionPaxItalic.ttf
+      style: italic
+  - family: BraveEightyOne
+    fonts:
+     - asset: fonts/BraveEightyOneRegular.ttf
+    
