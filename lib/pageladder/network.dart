@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:robot_checklists/main.dart';
 
 class PageLadderNetwork extends StatelessWidget {
+  const PageLadderNetwork({super.key});
+
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<AppState>();
-    // TODO: implement build
-    return Center(
+    // TODO: Implement network page
+    return const Center(
       child: Text("Network"),
     );
   }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:robot_checklists/main.dart';
 
 class PageLadderHome extends StatelessWidget {
-  TextStyle style = TextStyle(fontFamily: "BraveEightyOne", fontSize: 40);
+  const PageLadderHome({super.key});
+
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<AppState>();
+    TextStyle style =
+        const TextStyle(fontFamily: "BraveEightyOne", fontSize: 40);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceAround,

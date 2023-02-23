@@ -26,13 +26,13 @@ class MainApp extends StatelessWidget {
         child: MaterialApp(
           theme: ThemeData(
             useMaterial3: true,
-            colorScheme: lightColorScheme ?? ColorScheme.light(),
+            colorScheme: lightColorScheme ?? const ColorScheme.light(),
           ),
           darkTheme: ThemeData(
-            colorScheme: darkColorScheme ?? ColorScheme.dark(),
+            colorScheme: darkColorScheme ?? const ColorScheme.dark(),
             useMaterial3: true,
           ),
-          home: HomePage(),
+          home: const HomePage(),
         ),
       );
     });
@@ -43,7 +43,6 @@ class AppState extends ChangeNotifier {
   List<Map<String, dynamic>> pitsData = [];
   bool pitsDataLoaded = false;
   Future<void> loadPitsData() async {
-    print("loadPitsData run");
     List range(int from, int to) => List.generate(to - from, (i) => i + from);
     final yamlString = await rootBundle.loadString("assets/pits.yaml");
     final List<dynamic> parsedYaml = loadYaml(yamlString).toList();
@@ -67,7 +66,6 @@ class AppState extends ChangeNotifier {
   List<StatsField> statsData = [];
   bool statsDataLoaded = false;
   Future<void> loadStatsData() async {
-    print("loadStatsData run");
     final yamlString = await rootBundle.loadString("assets/stats.yaml");
     final List<dynamic> parsedYaml = loadYaml(yamlString).toList();
     for (var i in parsedYaml) {
@@ -78,7 +76,7 @@ class AppState extends ChangeNotifier {
 }
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -91,22 +89,22 @@ class _HomePageState extends State<HomePage> {
     Widget page;
     switch (selectedIndex) {
       case 0:
-        page = PageLadderHome();
+        page = const PageLadderHome();
         break;
       case 1:
         page = const PageLadderPits();
         break;
       case 2:
-        page = PageLadderScouting();
+        page = const PageLadderScouting();
         break;
       case 3:
-        page = PageLadderDrivers();
+        page = const PageLadderDrivers();
         break;
       case 4:
-        page = PageLadderNetwork();
+        page = const PageLadderNetwork();
         break;
       case 5:
-        page = PageLadderStats();
+        page = const PageLadderStats();
         break;
       case 6:
         page = const PageLadderField();
