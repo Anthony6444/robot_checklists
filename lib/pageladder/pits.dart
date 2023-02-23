@@ -12,12 +12,10 @@ class PageLadderPits extends StatefulWidget {
 
 class PageLadderPitsState extends State<PageLadderPits> {
   late List<Map<String, dynamic>> pitsData;
-  bool loaded = false;
-  void runOnce() {
-    if (loaded) return;
-    var appState = context.watch<AppState>();
+  void runOnce(AppState appState) {
+    if (appState.yamlLoaded) return;
     appState.loadYamlData();
-    loaded = true;
+    appState.yamlLoaded = true;
   }
 
   bool allComplete() {
@@ -54,8 +52,8 @@ class PageLadderPitsState extends State<PageLadderPits> {
 
   @override
   Widget build(BuildContext context) {
-    runOnce();
     var appState = context.watch<AppState>();
+    runOnce(appState);
     pitsData = appState.pitsData;
 
     return Column(
