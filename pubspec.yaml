@@ -32,8 +32,5 @@ flutter:
     fonts:
      - asset: fonts/BraveEightyOneRegular.ttf
   assets:
-    - assets/pits.yaml
-    - assets/field_diagram.png
-    - assets/field_diagram_cropped.png
-    - assets/logo.png
+    - assets/
     
