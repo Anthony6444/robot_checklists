@@ -126,7 +126,6 @@ class StatsField {
     required this.list,
   });
   factory StatsField.fromYaml(var yaml) {
-    print(yaml);
     return StatsField(
       name: yaml['title'],
       desc: yaml['desc'],
