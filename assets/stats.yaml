@@ -1,4 +1,16 @@
 - 
-  title: Title
-  desc: Description
-  
+  title: Title Uno
+  image: assets/robot.jpg
+  list: 
+    - List item eins
+    - List item zwei
+    - List Item drei
+    - List item vier
+-
+  title: Title Zwei
+  desc: Description eins
+  image: there-isnt-one-here.jpg
+  list:
+   - List item 1
+   - List item 2
+   - List item 3

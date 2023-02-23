@@ -44,10 +44,10 @@ class AppState extends ChangeNotifier {
   bool pitsDataLoaded = false;
   Future<void> loadPitsData() async {
     print("loadPitsData run");
-    List _range(int from, int to) => List.generate(to - from, (i) => i + from);
+    List range(int from, int to) => List.generate(to - from, (i) => i + from);
     final yamlString = await rootBundle.loadString("assets/pits.yaml");
     final List<dynamic> parsedYaml = loadYaml(yamlString).toList();
-    for (var i in _range(0, parsedYaml.length)) {
+    for (var i in range(0, parsedYaml.length)) {
       pitsData.add({});
       pitsData[i]['name'] = parsedYaml[i]['name'];
       pitsData[i]['desc'] = parsedYaml[i]['desc'];
@@ -61,12 +61,19 @@ class AppState extends ChangeNotifier {
         }
       }
     }
+    notifyListeners();
   }
 
-  List<Map<String, dynamic>> statsData = [];
+  List<StatsField> statsData = [];
   bool statsDataLoaded = false;
   Future<void> loadStatsData() async {
     print("loadStatsData run");
+    final yamlString = await rootBundle.loadString("assets/stats.yaml");
+    final List<dynamic> parsedYaml = loadYaml(yamlString).toList();
+    for (var i in parsedYaml) {
+      statsData.add(StatsField.fromYaml(i));
+    }
+    notifyListeners();
   }
 }
 
@@ -87,7 +94,7 @@ class _HomePageState extends State<HomePage> {
         page = PageLadderHome();
         break;
       case 1:
-        page = PageLadderPits();
+        page = const PageLadderPits();
         break;
       case 2:
         page = PageLadderScouting();
@@ -102,7 +109,7 @@ class _HomePageState extends State<HomePage> {
         page = PageLadderStats();
         break;
       case 6:
-        page = PageLadderField();
+        page = const PageLadderField();
         break;
       default:
         page = const Placeholder();
