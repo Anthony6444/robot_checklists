@@ -12,6 +12,8 @@ dependencies:
     sdk: flutter
   provider: ^6.0.5
   yaml: ^3.1.1
+  vector_math: any
+
 
 dev_dependencies:
   flutter_test:
@@ -31,4 +33,6 @@ flutter:
      - asset: fonts/BraveEightyOneRegular.ttf
   assets:
     - assets/pits.yaml
+    - assets/field_diagram.png
+    - assets/field_diagram_cropped.png
     
