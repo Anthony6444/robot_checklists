@@ -19,8 +19,8 @@ class PageLadderPitsState extends State<PageLadderPits> {
   }
 
   bool allComplete() {
-    for (var i in _range(0, pitsData.length)) {
-      for (ChecklistItem v in pitsData[i]['list']) {
+    for (var i in pitsData) {
+      for (ChecklistItem v in i['list']) {
         if (!v.checked) {
           return false;
         }
