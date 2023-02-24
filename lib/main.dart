@@ -41,9 +41,9 @@ class MainApp extends StatelessWidget {
 
 class AppState extends ChangeNotifier {
   List<Map<String, dynamic>> pitsData = [];
-  bool yamlLoaded = false;
-  Future<void> loadYamlData() async {
-    print("yamldataloaded run");
+  bool pitsDataLoaded = false;
+  Future<void> loadPitsData() async {
+    print("loadPitsData run");
     List _range(int from, int to) => List.generate(to - from, (i) => i + from);
     final yamlString = await rootBundle.loadString("assets/pits.yaml");
     final List<dynamic> parsedYaml = loadYaml(yamlString).toList();
@@ -61,6 +61,12 @@ class AppState extends ChangeNotifier {
         }
       }
     }
+  }
+
+  List<Map<String, dynamic>> statsData = [];
+  bool statsDataLoaded = false;
+  Future<void> loadStatsData() async {
+    print("loadStatsData run");
   }
 }
 
