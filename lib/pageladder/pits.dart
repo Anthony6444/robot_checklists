@@ -13,9 +13,9 @@ class PageLadderPits extends StatefulWidget {
 class PageLadderPitsState extends State<PageLadderPits> {
   late List<Map<String, dynamic>> pitsData;
   void runOnce(AppState appState) {
-    if (appState.yamlLoaded) return;
-    appState.loadYamlData();
-    appState.yamlLoaded = true;
+    if (appState.pitsDataLoaded) return;
+    appState.loadPitsData();
+    appState.pitsDataLoaded = true;
   }
 
   bool allComplete() {
