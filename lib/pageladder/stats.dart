@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:robot_checklists/main.dart';
@@ -45,15 +46,24 @@ class PageLadderStatsState extends State<PageLadderStats> {
                                 Text(appState.statsData[i].desc ?? ""),
                               ],
                             ),
+                            const Divider(),
                             Padding(
                               padding: const EdgeInsets.only(bottom: 8),
                               child: appState.statsData[i].imageLocation == null
-                                  ? const Placeholder(
-                                      child: Padding(
-                                        padding: EdgeInsets.all(20),
-                                        child: Text("No image specified"),
-                                      ),
-                                    )
+                                  ? () {
+                                      if (kDebugMode) {
+                                        return const Expanded(
+                                          child: Placeholder(
+                                            child: Padding(
+                                              padding: EdgeInsets.all(40),
+                                              child: Text("No image specified"),
+                                            ),
+                                          ),
+                                        );
+                                      } else {
+                                        return null;
+                                      }
+                                    }()
                                   : ClipRRect(
                                       borderRadius: BorderRadius.circular(10),
                                       child: Image.asset(
@@ -64,7 +74,7 @@ class PageLadderStatsState extends State<PageLadderStats> {
                                           padding: const EdgeInsets.all(8),
                                           child: (Placeholder(
                                             child: Padding(
-                                              padding: const EdgeInsets.all(20),
+                                              padding: const EdgeInsets.all(40),
                                               child: Text(
                                                 "No image named ${appState.statsData[i].imageLocation!}",
                                               ),
