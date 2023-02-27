@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,7 +12,12 @@ import 'package:robot_checklists/pageladder/network.dart';
 import 'package:robot_checklists/pageladder/pits.dart';
 import 'package:robot_checklists/pageladder/scouting.dart';
 import 'package:robot_checklists/pageladder/stats.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart';
 import 'package:yaml/yaml.dart';
+import 'package:http/http.dart' as http;
+
+String apiHome = "http://192.168.1.232";
 
 void main() {
   runApp(const MainApp());
@@ -18,8 +26,33 @@ void main() {
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
+  void initTelemetry() async {
+    Map<String, String> telemetryMap = {};
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool firstRun = prefs.getBool("isFirstRun")!;
+    print(firstRun);
+    String newUUID = const Uuid().v4();
+    if (firstRun) {
+      prefs.setString("uuid", newUUID);
+      prefs.setBool("isFirstRun", false);
+    }
+    telemetryMap['uuid'] = prefs.getString("uuid") ?? "00001-0000-0000-0000";
+    telemetryMap['platform'] = Platform.operatingSystem;
+    telemetryMap['version'] = Platform.operatingSystemVersion;
+    telemetryMap['locale'] = Platform.localeName;
+    print(telemetryMap.toString());
+    http.post(
+      Uri.parse("$apiHome/telemetry/ping"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(telemetryMap),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    initTelemetry();
     return DynamicColorBuilder(builder: (lightColorScheme, darkColorScheme) {
       return ChangeNotifierProvider(
         create: (context) => AppState(),
