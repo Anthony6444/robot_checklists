@@ -29,7 +29,7 @@ class MainApp extends StatelessWidget {
   void initTelemetry() async {
     Map<String, String> telemetryMap = {};
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool firstRun = prefs.getBool("isFirstRun")!;
+    bool firstRun = prefs.getBool("isFirstRun") ?? true;
     print(firstRun);
     String newUUID = const Uuid().v4();
     if (firstRun) {
