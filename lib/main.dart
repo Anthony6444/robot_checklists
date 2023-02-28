@@ -30,17 +30,15 @@ class MainApp extends StatelessWidget {
     Map<String, String> telemetryMap = {};
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool firstRun = prefs.getBool("isFirstRun") ?? true;
-    print(firstRun);
     String newUUID = const Uuid().v4();
     if (firstRun) {
       prefs.setString("uuid", newUUID);
       prefs.setBool("isFirstRun", false);
     }
-    telemetryMap['uuid'] = prefs.getString("uuid") ?? "00001-0000-0000-0000";
+    telemetryMap['uuid'] = prefs.getString("uuid") ?? newUUID;
     telemetryMap['platform'] = Platform.operatingSystem;
     telemetryMap['version'] = Platform.operatingSystemVersion;
     telemetryMap['locale'] = Platform.localeName;
-    print(telemetryMap.toString());
     http.post(
       Uri.parse("$apiHome/telemetry/ping"),
       headers: <String, String>{
@@ -106,6 +104,8 @@ class AppState extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  int currentTeam = 4215;
 }
 
 class HomePage extends StatefulWidget {
