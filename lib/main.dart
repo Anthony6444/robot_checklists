@@ -5,10 +5,8 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:robot_checklists/pageladder/drivers.dart';
 import 'package:robot_checklists/pageladder/field.dart';
 import 'package:robot_checklists/pageladder/home.dart';
-import 'package:robot_checklists/pageladder/network.dart';
 import 'package:robot_checklists/pageladder/pits.dart';
 import 'package:robot_checklists/pageladder/scouting.dart';
 import 'package:robot_checklists/pageladder/stats.dart';
@@ -131,15 +129,9 @@ class _HomePageState extends State<HomePage> {
         page = const PageLadderScouting();
         break;
       case 3:
-        page = const PageLadderDrivers();
-        break;
-      case 4:
-        page = const PageLadderNetwork();
-        break;
-      case 5:
         page = const PageLadderStats();
         break;
-      case 6:
+      case 4:
         page = const PageLadderField();
         break;
       default:
@@ -186,14 +178,6 @@ class _HomePageState extends State<HomePage> {
                       label: "Scouting",
                     ),
                     NavigationDestination(
-                      icon: Icon(Icons.gamepad),
-                      label: "Drivers",
-                    ),
-                    NavigationDestination(
-                      icon: Icon(Icons.account_tree),
-                      label: "Network",
-                    ),
-                    NavigationDestination(
                       icon: Icon(Icons.add_chart),
                       label: "Stats",
                     ),
@@ -228,14 +212,6 @@ class _HomePageState extends State<HomePage> {
                         NavigationRailDestination(
                           icon: Icon(Icons.person_add),
                           label: Text("Scouting"),
-                        ),
-                        NavigationRailDestination(
-                          icon: Icon(Icons.gamepad),
-                          label: Text("Drivers"),
-                        ),
-                        NavigationRailDestination(
-                          icon: Icon(Icons.account_tree),
-                          label: Text("Network"),
                         ),
                         NavigationRailDestination(
                           icon: Icon(Icons.add_chart),

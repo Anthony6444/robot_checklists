@@ -80,12 +80,15 @@ class _PageLadderScoutingState extends State<PageLadderScouting> {
                         children: [
                           Row(
                             children: [
-                              Text(
-                                data.name,
-                                style: const TextStyle(
-                                    fontFamily: "BraveEightyOne", fontSize: 30),
+                              Expanded(
+                                child: Text(
+                                  data.name,
+                                  style: const TextStyle(
+                                      fontFamily: "BraveEightyOne",
+                                      fontSize: 30),
+                                ),
                               ),
-                              const Spacer(),
+                              // const Spacer(),
                               Text(
                                 currentNumber.toString().padLeft(4, '0'),
                                 style: const TextStyle(
@@ -98,19 +101,21 @@ class _PageLadderScoutingState extends State<PageLadderScouting> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(left: 8.0),
-                                child: Text(() {
-                                  var message = "";
-                                  if (data.city != null) {
-                                    message += data.city!;
-                                  }
-                                  if (data.state != null) {
-                                    message += ", ${data.state!}";
-                                  }
-                                  if (data.country != null) {
-                                    message += ", ${data.country!}";
-                                  }
-                                  return message;
-                                }(), style: const TextStyle()),
+                                child: Expanded(
+                                  child: Text(() {
+                                    var message = "";
+                                    if (data.city != null) {
+                                      message += data.city!;
+                                    }
+                                    if (data.state != null) {
+                                      message += ", ${data.state!}";
+                                    }
+                                    if (data.country != null) {
+                                      message += ", ${data.country!}";
+                                    }
+                                    return message;
+                                  }(), style: const TextStyle()),
+                                ),
                               ),
                             ],
                           ),
