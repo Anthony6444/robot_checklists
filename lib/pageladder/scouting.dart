@@ -71,85 +71,110 @@ class _PageLadderScoutingState extends State<PageLadderScouting> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 TeamData data = snapshot.data!;
-                return Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              data.name,
-                              style: const TextStyle(
-                                  fontFamily: "BraveEightyOne", fontSize: 30),
-                            ),
-                            const Spacer(),
-                            Text(
-                              currentNumber.toString().padLeft(4, '0'),
-                              style: const TextStyle(
-                                  fontFamily: "OrionPax", fontSize: 20),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Text(() {
-                                var message = "";
-                                if (data.city != null) {
-                                  message += data.city!;
-                                }
-                                if (data.state != null) {
-                                  message += ", ${data.state!}";
-                                }
-                                if (data.country != null) {
-                                  message += ", ${data.country!}";
-                                }
-                                return message;
-                              }(), style: const TextStyle()),
-                            ),
-                          ],
-                        ),
-                        const Divider(),
-                        Row(
-                          children: [
-                            const Text("Scoring Type:"),
-                            const Spacer(),
-                            ScoreTypeCard(data.scoreCones, data.scoreCubes),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Text("Level:"),
-                            const Spacer(),
-                            LevelCards(data.highestLevel),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Text("Drivetrain:"),
-                            const Spacer(),
-                            DrivetrainCards(data.drivetrainType)
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Text("Autonomous:"),
-                            const Spacer(),
-                            AutonomousCards(
-                              data.balanceAuto,
-                              data.exitHomeAuto,
-                              data.scoreAuto,
-                            )
-                          ],
-                        ),
-                      ],
+                if (data.number == currentNumber) {
+                  return Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                data.name,
+                                style: const TextStyle(
+                                    fontFamily: "BraveEightyOne", fontSize: 30),
+                              ),
+                              const Spacer(),
+                              Text(
+                                currentNumber.toString().padLeft(4, '0'),
+                                style: const TextStyle(
+                                    fontFamily: "OrionPax", fontSize: 20),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: Text(() {
+                                  var message = "";
+                                  if (data.city != null) {
+                                    message += data.city!;
+                                  }
+                                  if (data.state != null) {
+                                    message += ", ${data.state!}";
+                                  }
+                                  if (data.country != null) {
+                                    message += ", ${data.country!}";
+                                  }
+                                  return message;
+                                }(), style: const TextStyle()),
+                              ),
+                            ],
+                          ),
+                          const Divider(),
+                          Row(
+                            children: [
+                              const Text("Scoring Type:"),
+                              const Spacer(),
+                              ScoreTypeCard(data.scoreCones, data.scoreCubes),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              const Text("Level:"),
+                              const Spacer(),
+                              LevelCards(data.highestLevel),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              const Text("Drivetrain:"),
+                              const Spacer(),
+                              DrivetrainCards(data.drivetrainType)
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              const Text("Autonomous:"),
+                              const Spacer(),
+                              AutonomousCards(
+                                data.balanceAuto,
+                                data.exitHomeAuto,
+                                data.scoreAuto,
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                );
+                  );
+                } else {
+                  return Card(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 100),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("Loading..."),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Padding(
+                                padding: EdgeInsets.only(top: 10),
+                                child: CircularProgressIndicator(),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }
               } else if (snapshot.hasError) {
                 return Card(
                   child: Padding(
