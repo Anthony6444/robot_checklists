@@ -22,7 +22,7 @@ class PageLadderHome extends StatelessWidget {
                   style: style,
                 ),
                 Image.asset(
-                  "assets/logo.png",
+                  "assets/logo_sized.png",
                   scale: 0.2,
                 ),
                 Text(
