@@ -12,12 +12,11 @@ import 'package:robot_checklists/pageladder/network.dart';
 import 'package:robot_checklists/pageladder/pits.dart';
 import 'package:robot_checklists/pageladder/scouting.dart';
 import 'package:robot_checklists/pageladder/stats.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:uuid/uuid.dart';
+import 'package:robot_checklists/secrets.dart';
 import 'package:yaml/yaml.dart';
 import 'package:http/http.dart' as http;
 
-String apiHome = "http://192.168.1.232";
+import 'globals.dart';
 
 void main() {
   runApp(const MainApp());
@@ -27,21 +26,22 @@ class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
   void initTelemetry() async {
+    WidgetsFlutterBinding.ensureInitialized();
+
+    ByteData data =
+        await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
+    SecurityContext.defaultContext
+        .setTrustedCertificatesBytes(data.buffer.asUint8List());
     Map<String, String> telemetryMap = {};
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool firstRun = prefs.getBool("isFirstRun") ?? true;
-    String newUUID = const Uuid().v4();
-    if (firstRun) {
-      prefs.setString("uuid", newUUID);
-      prefs.setBool("isFirstRun", false);
-    }
-    telemetryMap['uuid'] = prefs.getString("uuid") ?? newUUID;
+
     telemetryMap['platform'] = Platform.operatingSystem;
     telemetryMap['version'] = Platform.operatingSystemVersion;
     telemetryMap['locale'] = Platform.localeName;
     http.post(
       Uri.parse("$apiHome/telemetry/ping"),
       headers: <String, String>{
+        'X-RCC-Telemetry-Uuid': await getUUID(),
+        'X-Space-App-Key': detaAuthKey,
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(telemetryMap),
