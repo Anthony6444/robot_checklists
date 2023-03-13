@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:robot_checklists/pageladder/field.dart';
 import 'package:robot_checklists/pageladder/home.dart';
 import 'package:robot_checklists/pageladder/pits.dart';
-import 'package:robot_checklists/pageladder/scouting.dart';
+import 'package:robot_checklists/pageladder/scouting/scouting.dart';
 import 'package:robot_checklists/pageladder/stats.dart';
 import 'package:robot_checklists/secrets.dart';
 import 'package:yaml/yaml.dart';
@@ -121,6 +121,7 @@ class _HomePageState extends State<HomePage> {
     switch (selectedIndex) {
       case 0:
         page = const PageLadderHome();
+
         break;
       case 1:
         page = const PageLadderPits();
