@@ -1,4 +1,4 @@
-package com.example.rcs_scouting
+package com.anthony6444.rcs_scouting
 
 import io.flutter.embedding.android.FlutterActivity
 

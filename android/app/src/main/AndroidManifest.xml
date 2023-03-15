@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.rcs_scouting">
+    package="com.anthony6444.rcs_scouting">
    <application
         android:label="RCS Scouting"
         android:name="${applicationName}"
