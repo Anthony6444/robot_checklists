@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.robot_checklists">
    <application
-        android:label="Robot Checklists"
+        android:label="RCS 4215"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
