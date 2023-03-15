@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:robot_checklists/globals.dart';
-import 'package:robot_checklists/secrets.dart';
+import 'package:rcs_scouting/globals.dart';
+import 'package:rcs_scouting/secrets.dart';
 import 'package:http/http.dart' as http;
 
 class AddTeamDialog extends StatefulWidget {

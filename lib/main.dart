@@ -5,12 +5,12 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:robot_checklists/pageladder/field.dart';
-import 'package:robot_checklists/pageladder/home.dart';
-import 'package:robot_checklists/pageladder/pits.dart';
-import 'package:robot_checklists/pageladder/scouting/scouting.dart';
-import 'package:robot_checklists/pageladder/stats.dart';
-import 'package:robot_checklists/secrets.dart';
+import 'package:rcs_scouting/pageladder/field.dart';
+import 'package:rcs_scouting/pageladder/home.dart';
+import 'package:rcs_scouting/pageladder/pits.dart';
+import 'package:rcs_scouting/pageladder/scouting/scouting.dart';
+import 'package:rcs_scouting/pageladder/stats.dart';
+import 'package:rcs_scouting/secrets.dart';
 import 'package:yaml/yaml.dart';
 import 'package:http/http.dart' as http;
 

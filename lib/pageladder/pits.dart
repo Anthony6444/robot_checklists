@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:robot_checklists/main.dart';
+import 'package:rcs_scouting/main.dart';
 import 'package:yaml/yaml.dart';
 
 class PageLadderPits extends StatefulWidget {

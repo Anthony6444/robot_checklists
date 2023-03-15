@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:robot_checklists/pageladder/scouting/scouting_add_team.dart';
-import 'package:robot_checklists/secrets.dart';
+import 'package:rcs_scouting/pageladder/scouting/scouting_add_team.dart';
+import 'package:rcs_scouting/secrets.dart';
 
 import '../../globals.dart';
 

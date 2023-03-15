@@ -5,18 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "robot_checklists",
+            "name": "rcs_scouting",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "robot_checklists (profile mode)",
+            "name": "rcs_scouting (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "robot_checklists (release mode)",
+            "name": "rcs_scouting (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

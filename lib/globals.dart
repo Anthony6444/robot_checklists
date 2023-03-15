@@ -1,4 +1,4 @@
-library robot_checklists.globals;
+library rcs_scouting.globals;
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:robot_checklists/main.dart';
+import 'package:rcs_scouting/main.dart';
 
 class PageLadderStats extends StatefulWidget {
   const PageLadderStats({super.key});
