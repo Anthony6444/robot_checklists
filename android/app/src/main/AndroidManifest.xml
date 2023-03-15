@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.rcs_scouting">
    <application
-        android:label="RCS 4215"
+        android:label="RCS Scouting"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
