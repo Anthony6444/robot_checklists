@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:rcs_scouting/pageladder/scouting/scouting_add_match.dart';
 import 'package:rcs_scouting/pageladder/scouting/scouting_add_team.dart';
+import 'package:rcs_scouting/pageladder/scouting/scouting_edit_team.dart';
 import 'package:rcs_scouting/secrets.dart';
 
 import '../../globals.dart';
@@ -194,25 +196,19 @@ class _PageLadderScoutingState extends State<PageLadderScouting> {
                                               showDialog(
                                                   context: context,
                                                   builder: (context) {
-                                                    return AlertDialog(
-                                                      title: const Text(
-                                                          "Coming Soon"),
-                                                      actions: [
-                                                        TextButton(
-                                                            onPressed: () {
-                                                              Navigator.pop(
-                                                                  context);
-                                                            },
-                                                            child: const Text(
-                                                                "Ok"))
-                                                      ],
-                                                    );
+                                                    return const EditTeamDialog();
                                                   });
                                             },
                                             icon: const Icon(Icons.edit),
                                             label: const Text("Edit")),
                                         TextButton.icon(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return AddTeamMatch();
+                                                  });
+                                            },
                                             icon: const Icon(Icons.add),
                                             label: const Text("Add Match"))
                                       ],
