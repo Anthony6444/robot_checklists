@@ -8,7 +8,7 @@
 PRODUCT_NAME = RCS Scouting;
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.anthony6444.robotChecklists
+PRODUCT_BUNDLE_IDENTIFIER = com.anthony6444.rcsScouting
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2023 com.anthony6444. All rights reserved.
