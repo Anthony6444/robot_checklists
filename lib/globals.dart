@@ -3,7 +3,7 @@ library rcs_scouting.globals;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
-String apiHome = "https://rcsapi-1-q7026519.deta.app";
+String apiHome = "https://rcsapi.anthony6444.com";
 String tbaHome = "https://www.thebluealliance.com/api/v3";
 
 Future<String> getUUID() async {
