@@ -128,3 +128,94 @@ class PartialTeamData {
     );
   }
 }
+
+// ignore: constant_identifier_names
+enum Scale { LOW, MID, HIGH }
+
+class IndividualTeamMatch {
+  final int teamNumber;
+  final int matchNumber;
+
+  // Auto
+  final int autoBottom;
+  final int autoMiddle;
+  final int autoTop;
+
+  // Teleop
+  final int teleBottom;
+  final int teleMiddle;
+  final int teleTop;
+
+  // Charge station
+  final bool parked;
+  final bool docked;
+
+  // cycles
+  final int cycles;
+  final int failedCycles;
+
+  // Teamwork
+  final Scale allianceCooperation;
+  final Scale moveQuickly;
+  final Scale grabItemsWell;
+
+  // Match
+  final int totalPointsRobot;
+  final int totalPointsAlliance;
+  final bool win;
+  final int winMargin;
+
+  final String notes;
+  IndividualTeamMatch({
+    required this.teamNumber,
+    required this.matchNumber,
+    required this.autoBottom,
+    required this.autoMiddle,
+    required this.autoTop,
+    required this.teleBottom,
+    required this.teleMiddle,
+    required this.teleTop,
+    required this.parked,
+    required this.docked,
+    required this.cycles,
+    required this.failedCycles,
+    required this.allianceCooperation,
+    required this.moveQuickly,
+    required this.grabItemsWell,
+    required this.totalPointsRobot,
+    required this.totalPointsAlliance,
+    required this.win,
+    required this.winMargin,
+    required this.notes,
+  });
+  factory IndividualTeamMatch.friomJson(json) {
+    toEnum(i) {
+      if (i == 1) return Scale.LOW;
+      if (i == 2) return Scale.MID;
+      if (i == 3) return Scale.HIGH;
+      return Scale.LOW;
+    }
+
+    return IndividualTeamMatch(
+        teamNumber: json["team_number"],
+        matchNumber: json["match_number"],
+        autoBottom: json["auto_bottom"],
+        autoMiddle: json["auto_middle"],
+        autoTop: json["auto_top"],
+        teleBottom: json["tele_bottom"],
+        teleMiddle: json["tele_middle"],
+        teleTop: json["tele_top"],
+        parked: json["parked"],
+        docked: json["docked"],
+        cycles: json["cycles"],
+        failedCycles: json["failed_cycles"],
+        allianceCooperation: toEnum(json["alliance_cooperation"]),
+        moveQuickly: toEnum(json["move_quickly"]),
+        grabItemsWell: toEnum(json["grab_items_well"]),
+        totalPointsRobot: json["total_points_robot"],
+        totalPointsAlliance: json["total_points_alliance"],
+        win: json["win"],
+        winMargin: json["win_margin"],
+        notes: json["notes"]);
+  }
+}

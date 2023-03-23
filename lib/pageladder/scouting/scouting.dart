@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+import 'package:rcs_scouting/main.dart';
 import 'package:rcs_scouting/pageladder/scouting/scouting_add_match.dart';
 import 'package:rcs_scouting/pageladder/scouting/scouting_add_team.dart';
 import 'package:rcs_scouting/pageladder/scouting/scouting_edit_team.dart';
@@ -18,7 +20,6 @@ class PageLadderScouting extends StatefulWidget {
 
 class _PageLadderScoutingState extends State<PageLadderScouting> {
   int currentNumber = 0;
-
   late Future<TeamData> teamData;
   late Future<List<PartialTeamData>> teamList;
   @override
@@ -57,6 +58,7 @@ class _PageLadderScoutingState extends State<PageLadderScouting> {
 
   @override
   Widget build(BuildContext context) {
+    AppState appState = context.watch<AppState>();
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primaryContainer,
       body: Column(children: [
@@ -206,7 +208,7 @@ class _PageLadderScoutingState extends State<PageLadderScouting> {
                                               showDialog(
                                                   context: context,
                                                   builder: (context) {
-                                                    return AddTeamMatch();
+                                                    return const AddTeamMatch();
                                                   });
                                             },
                                             icon: const Icon(Icons.add),
@@ -363,6 +365,7 @@ class _PageLadderScoutingState extends State<PageLadderScouting> {
                                         setState(() {
                                           currentNumber =
                                               snapshot.data![index].number;
+                                          appState.currentTeam = currentNumber;
                                           teamData = fetchOneTeamData();
                                         });
                                       },
