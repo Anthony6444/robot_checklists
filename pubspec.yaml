@@ -16,6 +16,7 @@ dependencies:
   http: ^0.13.5
   shared_preferences: ^2.0.18
   uuid: ^3.0.7
+  quantity_input: ^1.0.2
 
 
 dev_dependencies:

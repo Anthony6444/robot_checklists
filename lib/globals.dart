@@ -133,39 +133,40 @@ class PartialTeamData {
 enum Scale { LOW, MID, HIGH }
 
 class IndividualTeamMatch {
-  final int teamNumber;
-  final int matchNumber;
+  int teamNumber;
+  int matchNumber;
 
   // Auto
-  final int autoBottom;
-  final int autoMiddle;
-  final int autoTop;
+  int autoBottom;
+  int autoMiddle;
+  int autoTop;
 
   // Teleop
-  final int teleBottom;
-  final int teleMiddle;
-  final int teleTop;
+  int teleBottom;
+  int teleMiddle;
+  int teleTop;
 
   // Charge station
-  final bool parked;
-  final bool docked;
+  bool parked;
+  bool docked;
 
-  // cycles
-  final int cycles;
-  final int failedCycles;
+  // Cycles
+  int cycles;
+  int failedCycles;
 
   // Teamwork
-  final Scale allianceCooperation;
-  final Scale moveQuickly;
-  final Scale grabItemsWell;
+  Scale allianceCooperation;
+  Scale moveQuickly;
+  Scale grabItemsWell;
 
   // Match
-  final int totalPointsRobot;
-  final int totalPointsAlliance;
-  final bool win;
-  final int winMargin;
+  int totalPointsRobot;
+  int totalPointsAlliance;
+  bool win;
+  int winMargin;
 
-  final String notes;
+  String notes;
+
   IndividualTeamMatch({
     required this.teamNumber,
     required this.matchNumber,
@@ -188,7 +189,7 @@ class IndividualTeamMatch {
     required this.winMargin,
     required this.notes,
   });
-  factory IndividualTeamMatch.friomJson(json) {
+  factory IndividualTeamMatch.fromJson(json) {
     toEnum(i) {
       if (i == 1) return Scale.LOW;
       if (i == 2) return Scale.MID;
